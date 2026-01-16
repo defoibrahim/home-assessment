@@ -4,12 +4,12 @@ A modern cryptocurrency tracking and analytics Flutter application built as part
 
 ## Screenshots
 
-| Market Data | Market Detail | Analytics | Portfolio |
-|:-----------:|:-------------:|:---------:|:---------:|
+|                 Market Data                  |                  Market Detail                   |                Analytics                 |                Portfolio                 |
+| :------------------------------------------: | :----------------------------------------------: | :--------------------------------------: | :--------------------------------------: |
 | ![Market Data](screenshots/market_data.jpeg) | ![Market Detail](screenshots/market_detail.jpeg) | ![Analytics](screenshots/analytics.jpeg) | ![Portfolio](screenshots/portfolio.jpeg) |
 
-| Light Mode |
-|:----------:|
+|                 Light Mode                 |
+| :----------------------------------------: |
 | ![Light Mode](screenshots/light_mode.jpeg) |
 
 ---
@@ -46,23 +46,29 @@ lib/
 ├── core/              # Theme & failure classes
 │   ├── failure.dart
 │   └── theme/
+├── gen/               # Generated assets (flutter_gen)
+│   └── assets.gen.dart
 ├── models/            # Data models (Equatable)
 │   ├── analytics_model.dart
 │   ├── market_data_model.dart
 │   └── portfolio_model.dart
-├── providers/         # State management (ChangeNotifier)
+├── providers/         # State management
 │   ├── analytics_provider.dart
 │   ├── market_data_provider.dart
 │   ├── navigation_provider.dart
-│   └── portfolio_provider.dart
+│   ├── portfolio_provider.dart
+│   ├── providers.dart (barrel)
+│   └── theme_provider.dart
 ├── screens/           # UI screens
 │   ├── analytics_screen.dart
 │   ├── main_screen.dart
 │   ├── market_data_screen.dart
 │   ├── market_detail_screen.dart
-│   └── portfolio_screen.dart
+│   ├── portfolio_screen.dart
+│   └── screens.dart (barrel)
 ├── services/          # API & WebSocket services
 │   ├── api_service.dart
+│   ├── services.dart (barrel)
 │   └── websocket_service.dart
 ├── utils/             # Constants & extensions
 │   ├── constants.dart
@@ -73,7 +79,8 @@ lib/
 │   ├── market_detail_widgets.dart
 │   ├── market_list_widgets.dart
 │   ├── portfolio_widgets.dart
-│   └── symbol_avatar.dart
+│   ├── symbol_avatar.dart
+│   └── widgets.dart (barrel)
 └── main.dart          # App entry & DI setup
 ```
 
@@ -81,17 +88,17 @@ lib/
 
 ## Tech Stack
 
-| Category | Technology |
-|----------|------------|
-| **Framework** | Flutter 3.x |
-| **State Management** | Provider |
-| **HTTP Client** | Dio |
-| **WebSocket** | web_socket_channel |
-| **Charts** | fl_chart |
-| **Loading States** | Skeletonizer |
-| **Pull-to-Refresh** | pull_to_refresh |
-| **Testing** | flutter_test, mocktail |
-| **Functional Types** | dartz (Either) |
+| Category             | Technology             |
+| -------------------- | ---------------------- |
+| **Framework**        | Flutter 3.x            |
+| **State Management** | Provider               |
+| **HTTP Client**      | Dio                    |
+| **WebSocket**        | web_socket_channel     |
+| **Charts**           | fl_chart               |
+| **Loading States**   | Skeletonizer           |
+| **Pull-to-Refresh**  | pull_to_refresh        |
+| **Testing**          | flutter_test, mocktail |
+| **Functional Types** | dartz (Either)         |
 
 ---
 
@@ -121,21 +128,30 @@ flutter run
 flutter test
 ```
 
+### Live Tracking 🔴
+
+To enable real-time price updates:
+
+1. Navigate to the **Market** tab.
+2. Tap the **LIVE/OFF** button in the top-right corner of the AppBar.
+3. **Green (LIVE)**: real-time WebSocket updates are active.
+4. **Grey (OFF)**: updates are paused (pull-to-refresh enabled).
+
 ---
 
 ## API Endpoints
 
 The app integrates with the following backend endpoints:
 
-| Endpoint | Description |
-|----------|-------------|
-| `GET /api/market-data` | List of crypto assets with prices |
-| `GET /api/market-data/:symbol` | Single asset details |
-| `GET /api/analytics/overview` | Market cap, volume, top movers |
-| `GET /api/analytics/trend` | Historical price trend data |
-| `GET /api/portfolio/overview` | Portfolio balance and P&L |
-| `GET /api/portfolio/holdings` | List of user holdings |
-| `WS /` | Real-time price updates |
+| Endpoint                       | Description                       |
+| ------------------------------ | --------------------------------- |
+| `GET /api/market-data`         | List of crypto assets with prices |
+| `GET /api/market-data/:symbol` | Single asset details              |
+| `GET /api/analytics/overview`  | Market cap, volume, top movers    |
+| `GET /api/analytics/trend`     | Historical price trend data       |
+| `GET /api/portfolio/overview`  | Portfolio balance and P&L         |
+| `GET /api/portfolio/holdings`  | List of user holdings             |
+| `WS /`                         | Real-time price updates           |
 
 ---
 

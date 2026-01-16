@@ -21,10 +21,6 @@ class PortfolioScreen extends StatelessWidget {
 
     return Consumer<PortfolioProvider>(
       builder: (context, provider, _) {
-        if (provider.isLoading && provider.overview == null) {
-          // Use skeleton instead of loader
-        }
-
         if (provider.error != null && provider.overview == null) {
           return Center(
             child: Column(

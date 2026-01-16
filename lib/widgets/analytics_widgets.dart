@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../models/analytics_model.dart';
+import 'chart_badge.dart';
 
 class StatCard extends StatelessWidget {
   final String label;
@@ -131,6 +133,10 @@ class DominancePieChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Find the largest dominance to highlight it
+    final maxDominance = [dominance.btc, dominance.eth, dominance.others]
+        .reduce((a, b) => a > b ? a : b);
+
     return AspectRatio(
       aspectRatio: 1.8,
       child: PieChart(
@@ -142,17 +148,19 @@ class DominancePieChart extends StatelessWidget {
               value: dominance.btc,
               title: 'BTC',
               color: Colors.orange,
-              isLarge: true,
+              isLarge: dominance.btc == maxDominance,
             ),
             _buildSection(
               value: dominance.eth,
               title: 'ETH',
               color: Colors.blue,
+              isLarge: dominance.eth == maxDominance,
             ),
             _buildSection(
               value: dominance.others,
               title: 'Others',
               color: Colors.grey,
+              isLarge: dominance.others == maxDominance,
             ),
           ],
         ),
@@ -177,39 +185,8 @@ class DominancePieChart extends StatelessWidget {
         fontWeight: FontWeight.bold,
         color: Colors.white,
       ),
-      badgeWidget: _Badge(title),
+      badgeWidget: Skeleton.ignore(child: ChartBadge(title)),
       badgePositionPercentageOffset: .98,
-    );
-  }
-}
-
-class _Badge extends StatelessWidget {
-  final String label;
-  const _Badge(this.label);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.8),
-        borderRadius: BorderRadius.circular(4),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 2,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Text(
-        label,
-        style: const TextStyle(
-          color: Colors.black,
-          fontSize: 10,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
     );
   }
 }

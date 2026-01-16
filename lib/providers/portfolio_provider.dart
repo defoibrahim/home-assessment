@@ -99,4 +99,10 @@ class PortfolioProvider extends ChangeNotifier {
         ? 'Connection error. Please check your internet.'
         : failure.message;
   }
+
+  @override
+  void dispose() {
+    _refreshController.dispose();
+    super.dispose();
+  }
 }
