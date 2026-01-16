@@ -147,7 +147,7 @@ class AllocationPieChart extends StatelessWidget {
         sortedHoldings.skip(4).fold(0.0, (sum, item) => sum + item.allocation);
 
     return AspectRatio(
-      aspectRatio: 1.3,
+      aspectRatio: 1.8,
       child: PieChart(
         PieChartData(
           sectionsSpace: 2,
@@ -158,7 +158,7 @@ class AllocationPieChart extends StatelessWidget {
                 color: _getColorForSymbol(h.symbol),
                 value: h.allocation,
                 title: '${h.allocation}%',
-                radius: 50,
+                radius: 60,
                 titleStyle: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
