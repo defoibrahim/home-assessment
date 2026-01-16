@@ -5,8 +5,10 @@ import 'market_data_screen.dart';
 import 'portfolio_screen.dart';
 import 'analytics_screen.dart';
 import '../providers/market_data_provider.dart';
-import '../core/theme/theme_provider.dart';
+import '../providers/theme_provider.dart';
 import '../providers/navigation_provider.dart';
+
+import '../gen/assets.gen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -25,7 +27,17 @@ class MainScreen extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text('PulseNow'),
+            title: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Assets.images.logo.image(
+                  height: 32,
+                  fit: BoxFit.contain,
+                ),
+                const SizedBox(width: 12),
+                const Text('PulseNow'),
+              ],
+            ),
             elevation: 0,
             actions: [
               // Theme toggle button

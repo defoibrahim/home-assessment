@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'providers/market_data_provider.dart';
+import 'providers/providers.dart';
 import 'screens/main_screen.dart';
-import 'core/theme/theme_provider.dart';
-import 'providers/navigation_provider.dart';
-import 'providers/analytics_provider.dart';
-import 'providers/portfolio_provider.dart';
+import 'services/services.dart';
 import 'core/theme/app_theme.dart';
-import 'services/api_service.dart';
-import 'services/websocket_service.dart';
 
 void main() {
   runApp(const PulseNowApp());

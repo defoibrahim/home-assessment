@@ -6,8 +6,8 @@ class AppConstants {
   // For physical device, use your computer's IP address
 
   // Physical Device (current)
-  static const String baseUrl = 'http://10.255.254.26:3000/api';
-  static const String wsUrl = 'ws://10.255.254.26:3000';
+  static const String baseUrl = 'http://192.168.1.54:3000/api';
+  static const String wsUrl = 'ws://192.168.1.54:3000';
 
   // iOS Simulator / Web (uncomment these for iOS or web)
   // static const String baseUrl = 'http://localhost:3000/api';
