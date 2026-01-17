@@ -51,6 +51,7 @@ class MarketFilterBar extends StatefulWidget {
 
 class _MarketFilterBarState extends State<MarketFilterBar> {
   late TextEditingController _controller;
+  final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
@@ -62,13 +63,14 @@ class _MarketFilterBarState extends State<MarketFilterBar> {
   @override
   void dispose() {
     _controller.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
   void _clearSearch() {
     _controller.clear();
     widget.provider.setSearchQuery('');
-    FocusScope.of(context).unfocus(); // Close keyboard
+    _focusNode.unfocus(); // Close keyboard
   }
 
   @override
@@ -80,7 +82,9 @@ class _MarketFilterBarState extends State<MarketFilterBar> {
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
           child: TextField(
             controller: _controller,
-            textInputAction: TextInputAction.done, // Close keyboard on Done
+            focusNode: _focusNode,
+            textInputAction: TextInputAction.done,
+            onTapOutside: (_) => _focusNode.unfocus(),
             decoration: InputDecoration(
               hintText: 'Search markets...',
               prefixIcon: const Icon(Icons.search),
@@ -293,6 +297,7 @@ class MarketEmptyView extends StatelessWidget {
   }
 }
 
+/// Market Data List Item
 class MarketDataListItem extends StatelessWidget {
   final MarketData data;
   final VoidCallback? onTap;

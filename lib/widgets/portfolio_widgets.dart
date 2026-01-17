@@ -166,7 +166,8 @@ class AllocationPieChart extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
-                badgeWidget: Skeleton.ignore(child: ChartBadge(h.symbol.split('/')[0])),
+                badgeWidget:
+                    Skeleton.ignore(child: ChartBadge(h.symbol.split('/')[0])),
                 badgePositionPercentageOffset: .98,
               );
             }),
