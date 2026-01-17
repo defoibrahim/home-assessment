@@ -140,6 +140,20 @@ class MarketData extends Equatable {
         lastUpdated: DateTime.now(),
       );
 
+  /// Create dummy data with a specific symbol (for detail screen skeleton)
+  static MarketData dummyFor(String symbol) => MarketData(
+        symbol: symbol,
+        description: symbol.split('/').first,
+        price: 43250.50,
+        change24h: 2.50,
+        changePercent24h: 2.50,
+        volume: 1250000000,
+        high24h: 44500,
+        low24h: 42000,
+        marketCap: 850000000000,
+        lastUpdated: DateTime.now(),
+      );
+
   static List<MarketData> get dummyList => [
         dummy,
         MarketData(

@@ -18,8 +18,11 @@ class MarketDataProvider with ChangeNotifier {
   final WebSocketService _wsService;
   StreamSubscription? _wsSubscription;
 
-  /// RefreshController for SmartRefresher
+  /// RefreshController for SmartRefresher (list screen)
   final RefreshController refreshController = RefreshController();
+
+  /// RefreshController for detail screen
+  final RefreshController detailRefreshController = RefreshController();
 
   /// Debounce timer for batching notifyListeners calls
   Timer? _debounceTimer;
@@ -89,6 +92,12 @@ class MarketDataProvider with ChangeNotifier {
 
     _isLoading = false;
     _immediateNotify();
+  }
+
+  /// Load market data for detail screen (completes detail refresh controller)
+  Future<void> loadDetailData() async {
+    await loadMarketData();
+    detailRefreshController.refreshCompleted();
   }
 
   /// Enable real-time updates via WebSocket
@@ -215,6 +224,7 @@ class MarketDataProvider with ChangeNotifier {
     _wsSubscription?.cancel();
     _wsService.disconnect();
     refreshController.dispose();
+    detailRefreshController.dispose();
     super.dispose();
   }
 }
